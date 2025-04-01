@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocuidado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .message-container {
+            background-color: #ffeb3b;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+
+        .social-buttons a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 20px;
+            display: inline-block;
+        }
+
+        .facebook {
+            background-color: #4267B2;
+        }
+
+        .twitter {
+            background-color: #1DA1F2;
+        }
+
+        .whatsapp {
+            background-color: #25D366;
+        }
+    </style>
+</head>
+<body>
+
+<div class="message-container animate__animated animate__fadeIn">
+    <div id="message" class="message">Haz una pausa y respira profundamente.</div>
+    <button class="btn-custom" id="newMessageBtn">¿Qué necesito hoy?</button>
+</div>
+
+<div class="social-buttons">
+    <a id="facebook-share" class="facebook" href="#" target="_blank" title="Compartir en Facebook">
+        <i class="fab fa-facebook-f"></i> Facebook
+    </a>
+    <a id="twitter-share" class="twitter" href="#" target="_blank" title="Compartir en Twitter">
+        <i class="fab fa-twitter"></i> Twitter
+    </a>
+    <a id="whatsapp-share" class="whatsapp" href="#" target="_blank" title="Compartir en WhatsApp">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+    </a>
+</div>
+
+<script>
+    const messages = [
+        "Recuerda que un respiro profundo te recarga de energía.",
+        "Haz una pausa y conecta con el presente.",
+        "Eres capaz de lograr lo que te propongas, no te olvides de cuidar de ti.",
+        "Un poco de calma puede cambiar tu día.",
+        "El autocuidado es un acto de amor propio.",
+        "Recuerda que está bien descansar, mereces un tiempo para ti.",
+        "Tómate un momento para hacer algo que te haga feliz."
+    ];
+
+    let currentMessage = "Haz una pausa y respira profundamente.";
+
+    document.getElementById('newMessageBtn').addEventListener('click', function() {
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        currentMessage = messages[randomIndex];
+        const messageContainer = document.getElementById('message');
+
+        messageContainer.classList.remove("animate__fadeIn");
+        void messageContainer.offsetWidth; // Re-trigger the animation
+        messageContainer.classList.add("animate__fadeIn");
+        messageContainer.textContent = currentMessage;
+
+        updateShareLinks();
+    });
+
+    function updateShareLinks() {
+        const encodedMessage = encodeURIComponent(currentMessage);
+        const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedMessage}`;
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedMessage}`;
+        const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+
+        document.getElementById('facebook-share').setAttribute('href', facebookUrl);
+        document.getElementById('twitter-share').setAttribute('href', twitterUrl);
+        document.getElementById('whatsapp-share').setAttribute('href', whatsappUrl);
+    }
+
+    updateShareLinks(); // Inicializa los enlaces al cargar la página
+</script>
+
+<!-- Font Awesome for social media icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+</body>
+</html>
